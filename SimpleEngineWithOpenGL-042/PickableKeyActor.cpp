@@ -4,7 +4,7 @@
 #include "Assets.h"
 #include "BoxComponent.h"
 #include "Game.h"
-#include "FPSActor.h"
+#include "ShipActor.h"
 
 void PickableKeyActor::updateActor(float dt)
 {

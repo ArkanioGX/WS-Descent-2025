@@ -176,6 +176,8 @@
     <ClCompile Include="PickableKeyActor.cpp" />
     <ClCompile Include="GameOverScreen.cpp" />
     <ClCompile Include="ShipActor.cpp" />
+    <ClCompile Include="ShipCameraComponent.cpp" />
+    <ClCompile Include="ShipMoveComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -364,6 +366,8 @@
     <ClInclude Include="PickableKeyActor.h" />
     <ClInclude Include="GameOverScreen.h" />
     <ClInclude Include="ShipActor.h" />
+    <ClInclude Include="ShipCameraComponent.h" />
+    <ClInclude Include="ShipMoveComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

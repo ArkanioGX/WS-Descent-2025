@@ -15,6 +15,7 @@
 #include "PauseScreen.h"
 #include "DoorActor.h"
 #include "PickableKeyActor.h"
+#include "ShipActor.h"
 
 bool Game::initialize()
 {
@@ -165,8 +166,8 @@ void Game::load()
 		addDoors(dka);
 	}
 
-	fps = new FPSActor();
-	fps->setPosition(StartPos);
+	player = new ShipActor();
+	player->setPosition(StartPos);
 
 	
 
@@ -450,8 +451,8 @@ void Game::reload()
 		addDoors(dka);
 	}
 
-	fps = new FPSActor();
-	fps->setPosition(StartPos);
+	player = new ShipActor();
+	player->setPosition(StartPos);
 
 }
 

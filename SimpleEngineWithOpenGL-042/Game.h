@@ -35,7 +35,7 @@ public:
 	Game& operator=(Game&&) = delete;
 
 private:
-	Game() : state(GameState::Gameplay), isUpdatingActors(false), fps(nullptr), crosshair(nullptr) {}
+	Game() : state(GameState::Gameplay), isUpdatingActors(false), player(nullptr), crosshair(nullptr) {}
 
 public:
 	bool initialize();
@@ -70,7 +70,7 @@ public:
 	void removeDoors(DoorActor* k);
 	vector<DoorActor*>& getDoors() { return doors; }
 
-	class FPSActor* getPlayer() { return fps; }
+	class ShipActor* getPlayer() { return player; }
 
 	Vector3 endPos;
 
@@ -92,7 +92,7 @@ private:
 	vector<Actor*> pendingActors;
 
 	// Game specific
-	class FPSActor* fps;
+	class ShipActor* player;
 	class SpriteComponent* crosshair;
 	vector<PlaneActor*> planes;
 	vector<PickableKeyActor*> keys;

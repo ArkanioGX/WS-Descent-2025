@@ -197,6 +197,8 @@
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShipActor.cpp" />
+    <ClCompile Include="ShipCameraComponent.cpp" />
+    <ClCompile Include="ShipMoveComponent.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereActor.cpp" />
     <ClCompile Include="Spline.cpp" />
@@ -269,6 +271,8 @@
     <ClInclude Include="Assets.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShipActor.h" />
+    <ClInclude Include="ShipCameraComponent.h" />
+    <ClInclude Include="ShipMoveComponent.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereActor.h" />
     <ClInclude Include="Spline.h" />

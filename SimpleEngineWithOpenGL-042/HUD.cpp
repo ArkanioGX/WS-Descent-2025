@@ -2,7 +2,7 @@
 #include "Assets.h"
 #include "Game.h"
 #include "TargetComponent.h"
-#include "FPSActor.h"
+#include "ShipActor.h"
 
 HUD::HUD():
 	UIScreen(),

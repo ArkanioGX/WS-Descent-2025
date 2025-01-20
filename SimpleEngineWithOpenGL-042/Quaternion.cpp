@@ -16,6 +16,8 @@ Quaternion::Quaternion(const Vector3& axis, float angle)
 	w = Maths::cos(angle / 2.0f);
 }
 
+
+
 void Quaternion::set(float inX, float inY, float inZ, float inW)
 {
 	x = inX;
@@ -39,3 +41,4 @@ void Quaternion::normalize()
 	z /= len;
 	w /= len;
 }
+
