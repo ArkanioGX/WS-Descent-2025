@@ -6,56 +6,53 @@
 ShipCameraComponent::ShipCameraComponent(Actor* ownerP):
 	CameraComponent(ownerP)
 {
-	Quaternion pitchQ = Quaternion(getOwner().getRight(), 50);
-	getOwner().setRotation(pitchQ);
+	noRollRotation = owner.getRotation();
 }
 
 void ShipCameraComponent::update(float dt)
 {
 	float rollInput = rollRight - rollLeft;
 	//Adjust
-	if (rollInput == 0 && (fmod(currentRoll,90)) != 0) {
-		currentRoll = 0;
-	}
-	else {
-		currentRoll = rollInput * dt * rollSpeed;
-	}
+	
 
 	currentYaw = lastMousePos.x * sensitivity * dt;
 	currentPitch = lastMousePos.y * sensitivity * dt;
 
-	Quaternion currentRot = owner.getRotation();
+	currentRoll = dt * rollSpeed;
+
+	
+	std::cout << owner.getRotation().z << std::endl;
+	Vector3 fwd = owner.getForward();
 	
 	if (currentYaw != 0) {
-		std::cout << currentPitch << std::endl;
 		Quaternion yawQ = Quaternion::concatenate(owner.getRotation(),Quaternion(owner.getUp(), currentYaw));
-
+		//fwd = Vector3::transform(fwd, yawQ);
 		getOwner().setRotation(yawQ);
-
-		Matrix4 lookAt = Matrix4::createLookAt(owner.getPosition(), owner.getPosition() + owner.getForward(), owner.getUp());
-
-		setViewMatrix(lookAt);
 	}
 	if (currentPitch != 0) {
-		std::cout << currentPitch << std::endl;
 		Quaternion pitchQ = Quaternion::concatenate(owner.getRotation(), Quaternion(owner.getRight(), currentPitch));
-
+		//fwd = Vector3::transform(fwd, pitchQ);
 		getOwner().setRotation(pitchQ);
-
-		Matrix4 lookAt = Matrix4::createLookAt(owner.getPosition(), owner.getPosition() + owner.getForward(), owner.getUp());
-
-		setViewMatrix(lookAt);
 	}
+
+	Vector3 eulerAngle = Quaternion::ToEulerAngles(owner.getRotation());
 	if (currentRoll != 0) {
-		std::cout << currentRoll << std::endl;
-		Quaternion RollQ = Quaternion::concatenate(owner.getRotation(), Quaternion(owner.getForward(), currentRoll));
-
-		getOwner().setRotation(RollQ);
-
-		Matrix4 lookAt = Matrix4::createLookAt(owner.getPosition(), owner.getPosition() + owner.getForward(), owner.getUp());
-
-		setViewMatrix(lookAt);
+		
 	}
+	else {
+
+	}
+	owner.setRotation(Quaternion::FromEuler(eulerAngle));
+
+
+	
+
+	
+
+	
+	Matrix4 lookAt = Matrix4::createLookAt(owner.getPosition(), owner.getPosition() + owner.getForward(), owner.getUp());
+	setViewMatrix(lookAt);
+
 
 }
 

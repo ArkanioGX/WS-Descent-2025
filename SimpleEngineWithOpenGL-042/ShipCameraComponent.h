@@ -29,6 +29,8 @@ private:
 	float currentPitch = 0;
 	float currentRoll = 0;
 
+	Quaternion noRollRotation;
+	Quaternion finalRotation;
 
 	float additiveRoll = 0;
 };
