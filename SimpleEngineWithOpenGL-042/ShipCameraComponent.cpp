@@ -1,5 +1,6 @@
 #include "ShipCameraComponent.h"
 #include "InputSystem.h"
+#include <iostream>
 #include "Actor.h"
 
 ShipCameraComponent::ShipCameraComponent(Actor* ownerP):
@@ -14,37 +15,48 @@ void ShipCameraComponent::update(float dt)
 	float rollInput = rollRight - rollLeft;
 	//Adjust
 	if (rollInput == 0 && (fmod(currentRoll,90)) != 0) {
-
+		currentRoll = 0;
 	}
 	else {
-		currentRoll += rollInput * dt * rollSpeed;
+		currentRoll = rollInput * dt * rollSpeed;
 	}
 
 	currentYaw = lastMousePos.x * sensitivity * dt;
 	currentPitch = lastMousePos.y * sensitivity * dt;
 
-	Vector3 newForward = owner.getForward();
-	Quaternion yawQ = Quaternion(getOwner().getUp(), currentYaw);
-	Vector3::transform(newForward, yawQ);
-
-	getOwner().setRotation(yawQ);
-
-	newForward = owner.getForward();
-	Quaternion pitchQ = Quaternion(getOwner().getRight(), currentPitch);
-	Vector3::transform(newForward, pitchQ);
-
-	getOwner().setRotation(pitchQ);
-
+	Quaternion currentRot = owner.getRotation();
 	
-	Vector3 viewForward = Vector3::transform(owner.getForward(), yawQ);
-	Vector3 viewUp = Vector3::transform(owner.getUp(), yawQ);
-	Vector3 cameraPosition = owner.getPosition();
-	Vector3 cameraForward = cameraPosition + viewForward;
-	
+	if (currentYaw != 0) {
+		std::cout << currentPitch << std::endl;
+		Quaternion yawQ = Quaternion::concatenate(owner.getRotation(),Quaternion(owner.getUp(), currentYaw));
 
-	Matrix4 rot = Matrix4::createLookAt(cameraPosition, cameraForward, viewUp);
+		getOwner().setRotation(yawQ);
 
-	setViewMatrix(rot);
+		Matrix4 lookAt = Matrix4::createLookAt(owner.getPosition(), owner.getPosition() + owner.getForward(), owner.getUp());
+
+		setViewMatrix(lookAt);
+	}
+	if (currentPitch != 0) {
+		std::cout << currentPitch << std::endl;
+		Quaternion pitchQ = Quaternion::concatenate(owner.getRotation(), Quaternion(owner.getRight(), currentPitch));
+
+		getOwner().setRotation(pitchQ);
+
+		Matrix4 lookAt = Matrix4::createLookAt(owner.getPosition(), owner.getPosition() + owner.getForward(), owner.getUp());
+
+		setViewMatrix(lookAt);
+	}
+	if (currentRoll != 0) {
+		std::cout << currentRoll << std::endl;
+		Quaternion RollQ = Quaternion::concatenate(owner.getRotation(), Quaternion(owner.getForward(), currentRoll));
+
+		getOwner().setRotation(RollQ);
+
+		Matrix4 lookAt = Matrix4::createLookAt(owner.getPosition(), owner.getPosition() + owner.getForward(), owner.getUp());
+
+		setViewMatrix(lookAt);
+	}
+
 }
 
 void ShipCameraComponent::processInput(const InputState& inputState)

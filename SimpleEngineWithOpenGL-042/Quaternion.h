@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector3.h"
+#include <glm/gtc/quaternion.hpp>
 class Quaternion
 {
 public:
@@ -16,6 +17,10 @@ public:
 	// This directly sets the quaternion components --
 	// don't use for axis/angle
 	explicit Quaternion(float inX, float inY, float inZ, float inW);
+
+	Quaternion(const glm::quat&);
+	operator glm::quat() const { return glm::quat(w,x,y,z); }
+
 
 	// Construct the quaternion from an axis and angle
 	// It is assumed that axis is already normalized,

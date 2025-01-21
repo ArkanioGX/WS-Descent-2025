@@ -7,6 +7,12 @@ Quaternion::Quaternion(float xP, float yP, float zP, float wP)
 	set(xP, yP, zP, wP);
 }
 
+Quaternion::Quaternion(const glm::quat& qt)
+{
+	set(qt.x, qt.y, qt.z, qt.w);
+}
+
+
 Quaternion::Quaternion(const Vector3& axis, float angle)
 {
 	float scalar = Maths::sin(angle / 2.0f);
