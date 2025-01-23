@@ -11,17 +11,17 @@ ShipCameraComponent::ShipCameraComponent(Actor* ownerP):
 
 void ShipCameraComponent::update(float dt)
 {
-	float rollInput = rollRight - rollLeft;
+	float rollInput =  rollLeft - rollRight;
 	//Adjust
 	
 
 	currentYaw = lastMousePos.x * sensitivity * dt;
 	currentPitch = lastMousePos.y * sensitivity * dt;
 
-	currentRoll = dt * rollSpeed;
+	
 
 	
-	std::cout << owner.getRotation().z << std::endl;
+	
 	Vector3 fwd = owner.getForward();
 	
 	if (currentYaw != 0) {
@@ -36,13 +36,20 @@ void ShipCameraComponent::update(float dt)
 	}
 
 	Vector3 eulerAngle = Quaternion::ToEulerAngles(owner.getRotation());
-	if (currentRoll != 0) {
-		
+	
+	if (rollInput != 0) {
+		eulerAngle.x += rollInput * dt * rollSpeed;
 	}
 	else {
-
+		//Find closest 90° angle
+		float RadiansQuarter = Maths::piOver2;
+		float closest90Angle = (fmodf((RadiansQuarter * 2) + eulerAngle.x, RadiansQuarter)) - (RadiansQuarter / 2);
+		float minMaxAngle = eulerAngle.x / RadiansQuarter;
+		eulerAngle.x = Maths::clamp(eulerAngle.x + AdjustRollSpeed * (closest90Angle > 0 ? 1 : -1) * dt, RadiansQuarter * floorf(minMaxAngle), RadiansQuarter * ceilf(minMaxAngle));
 	}
+
 	owner.setRotation(Quaternion::FromEuler(eulerAngle));
+	
 
 
 	

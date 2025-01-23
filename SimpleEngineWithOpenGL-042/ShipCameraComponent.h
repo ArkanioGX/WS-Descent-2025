@@ -15,12 +15,12 @@ private:
 	Vector2 lastMousePos = Vector2::zero;
 
 	bool rollLeft = false;
-	bool rollRight = true;
+	bool rollRight = false;
 
 	//Changeable 
 
 	float rollSpeed = 1;
-	float AdjustRollSpeed = 10;
+	float AdjustRollSpeed = 0.65;
 
 	float sensitivity = 1;
 
