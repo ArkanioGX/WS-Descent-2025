@@ -22,6 +22,8 @@ private:
 	float rollSpeed = 1;
 	float AdjustRollSpeed = 0.65;
 
+	float rollAdjustMinimum =  Maths::piOver2 - ((1) / 180 * Maths::pi);
+
 	float sensitivity = 1;
 
 	//Do not change

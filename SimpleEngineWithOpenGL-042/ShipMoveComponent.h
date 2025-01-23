@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Vector2.h"
+#include "Vector3.h"
 class ShipMoveComponent : public Component
 {
 public:
@@ -14,6 +15,12 @@ private:
 
 	Vector2 moveInput = Vector2::zero;
 
-	float moveSpeed = 1000;
+	Vector3 velocity = Vector3::zero;
+
+	float maxMoveSpeed = 1000;
+	float maxAccel = 2000;
+	float maxDeccel = 800;
+
+	float changeDirMultiplier = 2;
 };
 

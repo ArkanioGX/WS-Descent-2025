@@ -17,6 +17,7 @@ public:
 	float lengthSq() const;
 	float length() const;
 	void normalize();
+	
 
 	const float* getAsFloatPtr() const
 	{
@@ -114,6 +115,16 @@ public:
 	static Vector3 reflect(const Vector3& v, const Vector3& n)
 	{
 		return v - 2.0f * Vector3::dot(v, n) * n;
+	}
+
+	static Vector3 clamp (const Vector3& v, const float& n)
+	{
+		Vector3 currentVector = v;
+		if (v.length() > n) {
+			currentVector.normalize();
+			return currentVector * n;
+		}	
+		return v;
 	}
 
 	static Vector3 transform(const Vector3& vec, const class Matrix4& mat, float w = 1.0f);

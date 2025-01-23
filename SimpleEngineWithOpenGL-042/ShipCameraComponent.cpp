@@ -12,15 +12,9 @@ ShipCameraComponent::ShipCameraComponent(Actor* ownerP):
 void ShipCameraComponent::update(float dt)
 {
 	float rollInput =  rollLeft - rollRight;
-	//Adjust
-	
 
 	currentYaw = lastMousePos.x * sensitivity * dt;
 	currentPitch = lastMousePos.y * sensitivity * dt;
-
-	
-
-	
 	
 	Vector3 fwd = owner.getForward();
 	
@@ -44,31 +38,25 @@ void ShipCameraComponent::update(float dt)
 		//Find closest 90° angle
 		float RadiansQuarter = Maths::piOver2;
 		float closest90Angle = (fmodf((RadiansQuarter * 2) + eulerAngle.x, RadiansQuarter)) - (RadiansQuarter / 2);
-		float minMaxAngle = eulerAngle.x / RadiansQuarter;
-		eulerAngle.x = Maths::clamp(eulerAngle.x + AdjustRollSpeed * (closest90Angle > 0 ? 1 : -1) * dt, RadiansQuarter * floorf(minMaxAngle), RadiansQuarter * ceilf(minMaxAngle));
+		if (closest90Angle > -rollAdjustMinimum && closest90Angle < rollAdjustMinimum) {
+			float minMaxAngle = eulerAngle.x / RadiansQuarter;
+			eulerAngle.x = Maths::clamp(eulerAngle.x + AdjustRollSpeed * (closest90Angle > 0 ? 1 : -1) * dt, RadiansQuarter * floorf(minMaxAngle), RadiansQuarter * ceilf(minMaxAngle));
+		}
 	}
-
 	owner.setRotation(Quaternion::FromEuler(eulerAngle));
-	
 
-
-	
-
-	
-
-	
 	Matrix4 lookAt = Matrix4::createLookAt(owner.getPosition(), owner.getPosition() + owner.getForward(), owner.getUp());
 	setViewMatrix(lookAt);
-
-
 }
 
 void ShipCameraComponent::processInput(const InputState& inputState)
 {
-	lastMousePos = inputState.mouse.getPosition();
+	Vector2 controllerLookInput = inputState.controller.getRightStick();
+	controllerLookInput.y *= -1;
+	lastMousePos = controllerLookInput.length() != 0 ? controllerLookInput : inputState.mouse.getPosition();
 
-	rollLeft = inputState.keyboard.getKeyValue(SDL_SCANCODE_Q);
-	rollRight = inputState.keyboard.getKeyValue(SDL_SCANCODE_E);
+	rollLeft = inputState.keyboard.getKeyValue(SDL_SCANCODE_Q) || inputState.controller.getButtonValue(SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
+	rollRight = inputState.keyboard.getKeyValue(SDL_SCANCODE_E) || inputState.controller.getButtonValue(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);
 
 
 
