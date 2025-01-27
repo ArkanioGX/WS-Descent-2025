@@ -17,6 +17,8 @@ private:
 
 	Vector3 velocity = Vector3::zero;
 
+	
+
 	float maxMoveSpeed = 1000;
 	float maxAccel = 2000;
 	float maxDeccel = 800;

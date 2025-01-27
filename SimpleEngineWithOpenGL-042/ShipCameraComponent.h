@@ -19,10 +19,11 @@ private:
 
 	//Changeable 
 
+	float currentRollVelocity = 0;
 	float rollSpeed = 1;
 	float AdjustRollSpeed = 0.65;
 
-	float rollAdjustMinimum =  Maths::piOver2 - ((1) / 180 * Maths::pi);
+	float rollAdjustMinimum = Maths::piOver2 - Maths::toRadians(5);
 
 	float sensitivity = 1;
 
@@ -35,5 +36,8 @@ private:
 	Quaternion finalRotation;
 
 	float additiveRoll = 0;
+	float additiveRollAdjustSpeed = 3;
+	float additiveRollMax = Maths::toRadians(35);
+	float additiveRollIntensity = 0.1;
 };
 
