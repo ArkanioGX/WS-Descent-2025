@@ -6,7 +6,6 @@
 ShipCameraComponent::ShipCameraComponent(Actor* ownerP):
 	CameraComponent(ownerP)
 {
-	noRollRotation = owner.getRotation();
 }
 
 void ShipCameraComponent::update(float dt)
@@ -22,7 +21,7 @@ void ShipCameraComponent::update(float dt)
 	else if (additiveRoll != 0) {
 		//Reset additiveRoll
 		additiveRoll = Maths::clamp(
-			additiveRoll + (additiveRoll >= 0 ? -dt : dt ),
+			additiveRoll + (additiveRoll >= 0 ? -dt * additiveRollAdjustSpeed : dt * additiveRollAdjustSpeed),
 			(additiveRoll >= 0 ? 0 : -additiveRollMax),
 			(additiveRoll >= 0 ? additiveRollMax : 0));
 	}

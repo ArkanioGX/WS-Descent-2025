@@ -32,12 +32,9 @@ private:
 	float currentPitch = 0;
 	float currentRoll = 0;
 
-	Quaternion noRollRotation;
-	Quaternion finalRotation;
-
 	float additiveRoll = 0;
-	float additiveRollAdjustSpeed = 3;
-	float additiveRollMax = Maths::toRadians(35);
-	float additiveRollIntensity = 0.1;
+	float additiveRollAdjustSpeed = Maths::toRadians(40);
+	float additiveRollMax = Maths::toRadians(50);
+	float additiveRollIntensity = 0.5;
 };
 
