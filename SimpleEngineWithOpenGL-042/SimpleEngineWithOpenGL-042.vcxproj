@@ -201,6 +201,7 @@
     <ClCompile Include="ShipMoveComponent.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereActor.cpp" />
+    <ClCompile Include="SphereComponent.cpp" />
     <ClCompile Include="Spline.cpp" />
     <ClCompile Include="SplineActor.cpp" />
     <ClCompile Include="SplineCameraComponent.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="ShipMoveComponent.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereActor.h" />
+    <ClInclude Include="SphereComponent.h" />
     <ClInclude Include="Spline.h" />
     <ClInclude Include="SplineActor.h" />
     <ClInclude Include="SplineCameraComponent.h" />

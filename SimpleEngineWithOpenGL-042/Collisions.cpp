@@ -22,7 +22,7 @@ bool Collisions::intersect(const AABB& a, const AABB& b)
 bool Collisions::intersect(const Sphere& s, const AABB& box)
 {
 	float distSq = box.minDistSq(s.center);
-	return distSq <= (s.radius * s.radius);
+	return (distSq <= (s.radius * s.radius));
 }
 
 bool Collisions::intersect(const LineSegment& l, const Sphere& s, float& outT)

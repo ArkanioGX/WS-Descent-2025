@@ -9,5 +9,6 @@ public:
 private:
 	class ShipCameraComponent* CameraComponent;
 	class ShipMoveComponent* MoveComponent;
+	class SphereComponent* CollisionComponent;
 };
 

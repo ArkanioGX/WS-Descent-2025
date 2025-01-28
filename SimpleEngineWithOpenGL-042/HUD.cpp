@@ -71,7 +71,7 @@ void HUD::updateCrosshair(float dt)
 	Game::instance().getRenderer().getScreenDirection(start, dir);
 	LineSegment l(start, start + dir * cAimDist);
 	// Segment cast
-	PhysicsSystem::CollisionInfo info;
+	CInfo info;
 	if (Game::instance().getPhysicsSystem().segmentCast(l, info))
 	{
 		for (auto tc : targetComponents)

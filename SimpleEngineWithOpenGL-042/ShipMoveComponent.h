@@ -11,7 +11,13 @@ public:
 
 	void processInput(const struct InputState& inputState) override;
 
+	void fixCollisions();
+
+	Vector3 getVelocity() { return velocity; }
+
 private:
+
+	class SphereComponent* sphereColl;
 
 	Vector2 moveInput = Vector2::zero;
 

@@ -153,7 +153,7 @@ void FPSActor::shoot()
 	LineSegment l(getPosition(), getPosition() + dir*5000.f);
 
 	// Test segment vs world
-	PhysicsSystem::CollisionInfo info;
+	CInfo info;
 
 	std::vector<Actor*> IgnoredActors;
 	IgnoredActors.push_back(this);

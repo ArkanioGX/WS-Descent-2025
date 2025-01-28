@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector3.h"
 #include "LineSegment.h"
+#include "Collisions.h"
 #include <functional>
 #include <vector>
 
@@ -9,26 +10,22 @@ using std::vector;
 class PhysicsSystem
 {
 public:
-	struct CollisionInfo
-	{
-		// Point of collision
-		Vector3 point;
-		// Normal at collision
-		Vector3 normal;
-		// Component collided with
-		class BoxComponent* box;
-		// Owning actor of component
-		class Actor* actor;
-	};
+	
 
 	static vector<Actor*> DEFAULT_IGNORE;
 
 public:
 	PhysicsSystem();
 
+	//void sphere
+
 	void addBox(class BoxComponent* box);
 	void removeBox(class BoxComponent* box);
-	bool segmentCast(const LineSegment& l, CollisionInfo& outColl, std::vector<Actor*>& ActorsToIgnore = DEFAULT_IGNORE);
+	void addSphere(class SphereComponent* sphr);
+	void removeSphere(class SphereComponent* sphr);
+	bool segmentCast(const LineSegment& l, CInfo& outColl, std::vector<Actor*>& ActorsToIgnore = DEFAULT_IGNORE);
+
+	bool SphereCast(const Sphere& l, CInfo& outColl, std::vector<Actor*>& ActorsToIgnore);
 
 	// Tests collisions using naive pairwise
 	void testPairwise(std::function<void(class Actor*, class Actor*)> f);
@@ -38,6 +35,6 @@ public:
 
 private:
 	vector<class BoxComponent*> boxes;
-
+	vector<class SphereComponent*> spheres;
 };
 

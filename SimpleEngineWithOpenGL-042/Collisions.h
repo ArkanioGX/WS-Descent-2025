@@ -8,6 +8,18 @@
 using std::vector;
 using std::pair;
 
+struct CInfo
+{
+	// Point of collision
+	Vector3 point;
+	// Normal at collision
+	Vector3 normal;
+	// Component collided with
+	class Component* comp;
+	// Owning actor of component
+	class Actor* actor;
+};
+
 namespace Collisions
 {
 	bool intersect(const Sphere& a, const Sphere& b);
@@ -20,6 +32,8 @@ namespace Collisions
 	bool testSidePlane(float start, float end, float negd, const Vector3& norm, vector<pair<float, Vector3>>& out);
 
 	bool sweptSphere(const Sphere& P0, const Sphere& P1, const Sphere& Q0, const Sphere& Q1, float& outT);
+
+	
 }
 
 

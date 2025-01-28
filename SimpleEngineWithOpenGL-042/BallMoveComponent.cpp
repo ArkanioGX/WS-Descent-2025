@@ -29,7 +29,7 @@ void BallMoveComponent::update(float dt)
 	LineSegment l(start, end);
 
 	// Test segment vs world
-	PhysicsSystem::CollisionInfo info;
+	CInfo info;
 	// (Don't collide vs player)
 	if (owner.getGame().getPhysicsSystem().segmentCast(l, info) && info.actor != player)
 	{
