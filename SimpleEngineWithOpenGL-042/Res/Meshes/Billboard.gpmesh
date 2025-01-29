@@ -1,0 +1,20 @@
+{
+	"version":1,
+	"vertexformat":"PosNormTex",
+	"shader":"Sprite",
+	"textures": [
+		"Plane",
+		"Enemy"
+	],
+	"specularPower":100.0,
+	"vertices":[
+		[0,	-0.5,	-0.5,	0,	0,	1,	0,	1],
+		[0,	0.5,	-0.5,	0,	0,	1,	1,	1],
+		[0,	-0.5,	0.5,	0,	0,	1,	0,	0],
+		[0,	0.5,	0.5,	0,	0,	1,	1,	0]
+	],
+	"indices":[
+		[0,1,2],
+		[3,2,1]
+	]
+}

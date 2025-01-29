@@ -18,6 +18,7 @@ void ShipMoveComponent::update(float dt)
 	Vector3 newVel = Vector3::zero;
 	newVel += owner.getForward() * moveInput.y;
 	newVel += owner.getRight() * moveInput.x;
+	newVel += owner.getUp() * moveInput.z;
 	if (newVel.length() != 0) {
 		newVel.normalize();
 
@@ -40,26 +41,28 @@ void ShipMoveComponent::update(float dt)
 	
 
 	velocity = Vector3::clamp(velocity, maxMoveSpeed);
-	std::cout << " x : " << velocity.x << " y : " << velocity.y << " z : " << velocity.z << std::endl;
-	fixCollisions();
+	fixCollisions(dt);
 	owner.setPosition(owner.getPosition() + velocity * dt);
 }
 
 void ShipMoveComponent::processInput(const InputState& inputState)
 {
 	Vector2 controllerMoveInput = inputState.controller.getLeftStick();
-	if (controllerMoveInput.length() == 0) {
+	float controllerVerticalInput = inputState.controller.getButtonValue(SDL_CONTROLLER_BUTTON_A) - inputState.controller.getButtonValue(SDL_CONTROLLER_BUTTON_B);
+	if (controllerMoveInput.length() == 0 &&  controllerVerticalInput == 0) {
 		moveInput.x = inputState.keyboard.getKeyValue(SDL_SCANCODE_D) - inputState.keyboard.getKeyValue(SDL_SCANCODE_A);
 		moveInput.y = inputState.keyboard.getKeyValue(SDL_SCANCODE_W) - inputState.keyboard.getKeyValue(SDL_SCANCODE_S);
+		moveInput.z = inputState.keyboard.getKeyValue(SDL_SCANCODE_SPACE) - inputState.keyboard.getKeyValue(SDL_SCANCODE_LSHIFT);
 	}
 	else {
 		moveInput.x = controllerMoveInput.x;
 		moveInput.y = controllerMoveInput.y;
+		moveInput.z = controllerVerticalInput;
 	}
 	
 }
 
-void ShipMoveComponent::fixCollisions()
+void ShipMoveComponent::fixCollisions(float dt)
 {
 	// Need to recompute world transform to update world box
 	owner.computeWorldTransform();
@@ -71,6 +74,8 @@ void ShipMoveComponent::fixCollisions()
 	CInfo collInfo;
 	std::vector<Actor*> actorToIgnore = {};
 	if (Game::instance().getPhysicsSystem().SphereCast(playerSphere, collInfo, actorToIgnore)) {
+		std::cout << " x : " << collInfo.point.x << " y : " << collInfo.point.y << " z : " << collInfo.point.z << std::endl;
 		velocity = Vector3::reflect(velocity,collInfo.normal);
+		owner.setPosition(owner.getPosition() + velocity * dt);
 	}
 }

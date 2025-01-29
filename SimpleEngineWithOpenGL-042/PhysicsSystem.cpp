@@ -2,6 +2,7 @@
 #include "Collisions.h"
 #include "BoxComponent.h"
 #include "SphereComponent.h"
+#include "Actor.h"
 #include <algorithm>
 
 std::vector<Actor*> PhysicsSystem::DEFAULT_IGNORE = std::vector<Actor*>();
@@ -88,10 +89,11 @@ bool PhysicsSystem::SphereCast(const Sphere& l, CInfo& outColl, std::vector<Acto
 		// Does the segment intersect with the box?
 		if (Collisions::intersect(l, box->getWorldBox()))
 		{
+			t = Maths::abs((l.center - box->getOwner().getPosition()).length());
 			// Is this closer than previous intersection?
-			if (std::find(ActorsToIgnore.begin(), ActorsToIgnore.end(), &box->getOwner()) == ActorsToIgnore.end())
+			if (t < closestT && std::find(ActorsToIgnore.begin(), ActorsToIgnore.end(), &box->getOwner()) == ActorsToIgnore.end())
 			{
-				//closestT = t;
+				closestT = t;
 				Vector3 contactPoint = Vector3{
 					Maths::clamp(l.center.x,box->getWorldBox().min.x,box->getWorldBox().max.x),
 					Maths::clamp(l.center.y,box->getWorldBox().min.y,box->getWorldBox().max.y),

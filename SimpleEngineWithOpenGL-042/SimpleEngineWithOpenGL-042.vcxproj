@@ -151,6 +151,7 @@
     <ClCompile Include="BackgroundSpriteComponent.cpp" />
     <ClCompile Include="BallActor.cpp" />
     <ClCompile Include="BallMoveComponent.cpp" />
+    <ClCompile Include="BillboardComponent.cpp" />
     <ClCompile Include="BoxComponent.cpp" />
     <ClCompile Include="BulletImpactActor.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="DoorActor.cpp" />
     <ClCompile Include="DoorPlaneActor.cpp" />
+    <ClCompile Include="EnemyActor.cpp" />
     <ClCompile Include="FollowActor.cpp" />
     <ClCompile Include="FollowCameraComponent.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -187,7 +189,6 @@
     <ClCompile Include="OrbitCameraComponent.cpp" />
     <ClCompile Include="PauseScreen.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
-    <ClCompile Include="PickableKeyActor.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PlaneActor.cpp" />
     <ClCompile Include="Quaternion.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="RendererOGL.cpp" />
     <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShipActor.cpp" />
     <ClCompile Include="ShipCameraComponent.cpp" />
@@ -214,6 +216,7 @@
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="VertexArray.cpp" />
+    <ClCompile Include="WallActor.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +226,7 @@
     <ClInclude Include="BackgroundSpriteComponent.h" />
     <ClInclude Include="BallActor.h" />
     <ClInclude Include="BallMoveComponent.h" />
+    <ClInclude Include="BillboardComponent.h" />
     <ClInclude Include="BoxComponent.h" />
     <ClInclude Include="BulletImpactActor.h" />
     <ClInclude Include="Button.h" />
@@ -232,6 +236,7 @@
     <ClInclude Include="DialogBox.h" />
     <ClInclude Include="DoorActor.h" />
     <ClInclude Include="DoorPlaneActor.h" />
+    <ClInclude Include="EnemyActor.h" />
     <ClInclude Include="FollowActor.h" />
     <ClInclude Include="FollowCameraComponent.h" />
     <ClInclude Include="Font.h" />
@@ -262,7 +267,6 @@
     <ClInclude Include="OrbitCameraComponent.h" />
     <ClInclude Include="PauseScreen.h" />
     <ClInclude Include="PhysicsSystem.h" />
-    <ClInclude Include="PickableKeyActor.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneActor.h" />
     <ClInclude Include="Quaternion.h" />
@@ -270,6 +274,7 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RendererOGL.h" />
     <ClInclude Include="Assets.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShipActor.h" />
     <ClInclude Include="ShipCameraComponent.h" />
@@ -289,6 +294,7 @@
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="VertexArray.h" />
+    <ClInclude Include="WallActor.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

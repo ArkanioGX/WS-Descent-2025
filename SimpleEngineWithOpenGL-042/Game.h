@@ -11,6 +11,7 @@
 #include "HUD.h"
 #include "PickableKeyActor.h"
 #include "DoorActor.h"
+#include "LevelManager.h"
 
 
 using std::vector;
@@ -35,7 +36,7 @@ public:
 	Game& operator=(Game&&) = delete;
 
 private:
-	Game() : state(GameState::Gameplay), isUpdatingActors(false), player(nullptr), crosshair(nullptr) {}
+	Game() : state(GameState::Gameplay), isUpdatingActors(false), crosshair(nullptr) {}
 
 public:
 	bool initialize();
@@ -53,6 +54,7 @@ public:
 	RendererOGL& getRenderer() { return renderer; }
 	PhysicsSystem& getPhysicsSystem() { return physicsSystem; }
 	InputSystem& getInputSystem() { return inputSystem; }
+	LevelManager& getLevelManager() { return levelManager; }
 	const vector<class UIScreen*>& getUIStack() { return UIStack; }
 	void pushUI(class UIScreen* screen);
 	HUD* getHUD() { return hud; }
@@ -62,15 +64,7 @@ public:
 	void removePlane(class PlaneActor* plane);
 	vector<PlaneActor*>& getPlanes() { return planes; }
 
-	void addKey(PickableKeyActor* k);
-	void removeKey(PickableKeyActor* k);
-	vector<PickableKeyActor*>& getKeys() { return keys; }
-
-	void addDoors(DoorActor* k);
-	void removeDoors(DoorActor* k);
-	vector<DoorActor*>& getDoors() { return doors; }
-
-	class ShipActor* getPlayer() { return player; }
+	class Actor* getPlayer() { return levelManager.getPlayer(); }
 
 	Vector3 endPos;
 
@@ -84,6 +78,7 @@ private:
 	RendererOGL renderer;
 	InputSystem inputSystem;
 	PhysicsSystem physicsSystem;
+	LevelManager levelManager;
 	vector<class UIScreen*> UIStack;
 	HUD* hud;
 
@@ -92,10 +87,7 @@ private:
 	vector<Actor*> pendingActors;
 
 	// Game specific
-	class ShipActor* player;
 	class SpriteComponent* crosshair;
 	vector<PlaneActor*> planes;
-	vector<PickableKeyActor*> keys;
-	vector<DoorActor*> doors;
 };
 

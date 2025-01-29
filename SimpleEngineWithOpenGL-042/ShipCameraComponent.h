@@ -25,7 +25,7 @@ private:
 
 	float rollAdjustMinimum = Maths::piOver2 - Maths::toRadians(5);
 
-	float sensitivity = 1;
+	float sensitivity = 2;
 
 	//Do not change
 	float currentYaw = 0;
@@ -34,7 +34,7 @@ private:
 
 	float additiveRoll = 0;
 	float additiveRollAdjustSpeed = Maths::toRadians(40);
-	float additiveRollMax = Maths::toRadians(50);
+	float additiveRollMax = Maths::toRadians(25);
 	float additiveRollIntensity = 0.5;
 };
 

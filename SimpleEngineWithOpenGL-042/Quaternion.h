@@ -49,6 +49,28 @@ public:
 		return retVal;
 	}
 
+	static Quaternion LookAt(Vector3 sourcePoint, Vector3 destPoint, Vector3 up)
+	{
+		Vector3 forwardVector = (destPoint - sourcePoint);
+		forwardVector.normalize();
+
+		float dot = Vector3::dot(up, forwardVector);
+
+		if (Maths::abs(dot - (-1.0f)) < 0.000001f)
+		{
+			return Quaternion(up, Maths::pi);
+		}
+		if (Maths::abs(dot - (1.0f)) < 0.000001f)
+		{
+			return Quaternion::identity;
+		}
+
+		float rotAngle = (float)Maths::acos(dot);
+		Vector3 rotAxis = Vector3::cross(Vector3::unitX, forwardVector);
+		rotAxis.normalize();
+		return Quaternion(rotAxis,rotAngle);
+	}
+
 	// Linear interpolation
 	static Quaternion lerp(const Quaternion& a, const Quaternion& b, float f)
 	{

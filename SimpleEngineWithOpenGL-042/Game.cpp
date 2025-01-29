@@ -16,15 +16,17 @@
 #include "DoorActor.h"
 #include "PickableKeyActor.h"
 #include "ShipActor.h"
+#include "EnemyActor.h"
 
 bool Game::initialize()
 {
 	bool isWindowInit = window.initialize();
 	bool isRendererInit = renderer.initialize(window);
+	bool isSceneInit = levelManager.initialize(&actors);
 	bool isInputInit = inputSystem.initialize();
 	bool isFontInit = Font::initialize();
 
-	return isWindowInit && isRendererInit && isInputInit && isFontInit; // Return bool && bool && bool ...to detect error
+	return isWindowInit && isRendererInit && isInputInit && isFontInit && isSceneInit; // Return bool && bool && bool ...to detect error
 }
 
 void Game::load()
@@ -45,8 +47,6 @@ void Game::load()
 	Assets::loadTexture(renderer, "Res\\Textures\\Sphere.png", "Sphere");
 	Assets::loadTexture(renderer, "Res\\Textures\\Crosshair.png", "Crosshair");
 	Assets::loadTexture(renderer, "Res\\Textures\\RacingCar.png", "RacingCar");
-	Assets::loadTexture(renderer, "Res\\Textures\\Rifle.png", "Rifle");
-	Assets::loadTexture(renderer, "Res\\Textures\\Target.png", "Target");
 	Assets::loadTexture(renderer, "Res\\Textures\\ButtonYellow.png", "ButtonYellow");
 	Assets::loadTexture(renderer, "Res\\Textures\\ButtonBlue.png", "ButtonBlue");
 	Assets::loadTexture(renderer, "Res\\Textures\\DialogBG.png", "DialogBG");
@@ -55,15 +55,10 @@ void Game::load()
 	Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Blip.png", "Blip");
 	Assets::loadTexture(renderer, "Res\\Textures\\RadarArrow.png", "RadarArrow");
-	Assets::loadTexture(renderer, "Res\\Textures\\Door.png", "Door");
-	Assets::loadTexture(renderer, "Res\\Textures\\DoorLockedR.png", "DoorR");
-	Assets::loadTexture(renderer, "Res\\Textures\\DoorLockedB.png", "DoorB");
-	Assets::loadTexture(renderer, "Res\\Textures\\KeyR.png", "KeyR");
-	Assets::loadTexture(renderer, "Res\\Textures\\KeyB.png", "KeyB");
 	Assets::loadTexture(renderer, "Res\\Textures\\HPLogo.png", "HPLogo");
 	Assets::loadTexture(renderer, "Res\\Textures\\BallImpact.png", "BImpact");
 	Assets::loadTexture(renderer, "Res\\Textures\\ExitPlatform.png", "Exit");
-	Assets::loadTexture(renderer, "Res\\Textures\\RadarArrow.png", "RadarArrow");
+	Assets::loadTexture(renderer, "Res\\Textures\\Enemy.png", "Enemy");
 
 	Assets::loadMesh("Res\\Meshes\\Cube.gpmesh", "Mesh_Cube");
 	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
@@ -72,145 +67,20 @@ void Game::load()
 	Assets::loadMesh("Res\\Meshes\\RacingCar.gpmesh", "Mesh_RacingCar");
 	Assets::loadMesh("Res\\Meshes\\Target.gpmesh", "Mesh_Target");
 	Assets::loadMesh("Res\\Meshes\\BulletImpact.gpmesh", "Mesh_BImpact");
+	Assets::loadMesh("Res\\Meshes\\Billboard.gpmesh", "Mesh_Billboard");
 
 	Assets::loadFont("Res\\Fonts\\Carlito-Regular.ttf", "Carlito");
 	Assets::loadText("Res\\Localization\\English.gptext");
 
 	Assets::loadLevel("Res\\Levels\\level1.json", "Level1");
 
-	Vector3 StartPos = Vector3(-500.f, -500.f, 0.f);
+	levelManager.loadLevel(Assets::getLevel("Level1"));
 
-	Level& l1 = Assets::getLevel("Level1");
-	float size = 200.0f;
-	int mapSize =  l1.getMaxSize();
-	//Load Tiles
-	for (int x = 0; x < mapSize; x++) {
-		for (int y = 0; y < mapSize; y++) {
-			PlaneActor* pw;
-			Quaternion q;
-			DoorActor* da;
-			switch (l1.getTileAt(x, y)) {
-			case 1:
-				q = Quaternion(Vector3::unitX, Maths::piOver2);
-				pw = new PlaneActor();
-				pw->setPosition(Vector3(x * size, (y - 0.5) * size, 0));
-				pw->setScale(2);
-				pw->setRotation(q);
-				pw->getMesh()->setTextureIndex(2);
-				pw = new PlaneActor();
-				pw->setPosition(Vector3(x * size, (y + 0.5) * size, 0));
-				pw->setScale(2);
-				pw->setRotation(q);
-				pw->getMesh()->setTextureIndex(2);
-				q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::piOver2));
-				pw = new PlaneActor();
-				pw->setPosition(Vector3((x - 0.5) * size, (y)*size, 0));
-				pw->setScale(2);
-				pw->setRotation(q);
-				pw->getMesh()->setTextureIndex(2);
-				pw = new PlaneActor();
-				pw->setPosition(Vector3((x + 0.5) * size, (y)*size, 0));
-				pw->setScale(2);
-				pw->setRotation(q);
-				pw->getMesh()->setTextureIndex(2);
-				break;
-			case 2:
-				StartPos = Vector3(x * size, y * size, 0);
-				break;
-			case 3:
-				endPos = Vector3(x * size, y * size, 0);
-				break;
+	EnemyActor* ea = new EnemyActor();
+	ea->setPosition(Vector3(0, -1000, 0));
 
-			case 4:
-				da = new DoorActor();
-				da->setPosition(Vector3(x * size, y * size, 0));
-				da->setSize(size);
-				da->createDoors();
-				break;
-			default:
-				break;
-			}
-
-			PlaneActor* p = new PlaneActor();
-			p->setPosition(Vector3(x * size, y * size, -size/2));
-			p->setScale(2);
-			if (l1.getTileAt(x, y) == 3) {
-				p->getMesh()->setTextureIndex(9);
-			}
-
-			 p = new PlaneActor();
-			p->setPosition(Vector3(x * size, y * size, size / 2));
-			p->setScale(2);
-			//Quaternion q(Vector3::unitY, -Maths::piOver2);
-			//q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
-			//ca->setRotation(q);
-		}
-	}
-	//Load keys
-	for (int i = 0; i < l1.getKeyList().size(); i++) {
-		KeyData kd = l1.getKeyList()[i];
-		PickableKeyActor* pka = new PickableKeyActor();
-		pka->setKeyID(kd.keyID);
-		pka->setPosition(Vector3(kd.pos.y*size,kd.pos.x*size,0));
-		addKey(pka);
-	}
-	//Load doors
-	for (int i = 0; i < l1.getDoors().size(); i++) {
-		DoorData kd = l1.getDoors()[i];
-		DoorActor* dka = new DoorActor();
-		
-		dka->setPosition(Vector3(kd.pos.y * size, kd.pos.x * size, 0));
-		dka->setSize(size);
-		dka->createDoors();
-		dka->LockedKey(kd.keyID);
-		addDoors(dka);
-	}
-
-	player = new ShipActor();
-	player->setPosition(StartPos);
-
-	
-
-	/*
-	// Floor and walls
-
-	// Setup floor
-	const float start = -1250.0f;
-	const float size = 250.0f;
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 10; j++)
-		{
-			PlaneActor* p = new PlaneActor();
-			p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
-		}
-	}
-
-	// Left/right walls
-	q = Quaternion(Vector3::unitX, Maths::piOver2);
-	for (int i = 0; i < 10; i++)
-	{
-		PlaneActor* p = new PlaneActor();
-		p->setPosition(Vector3(start + i * size, start - size, 0.0f));
-		p->setRotation(q);
-
-		p = new PlaneActor();
-		p->setPosition(Vector3(start + i * size, -start + size, 0.0f));
-		p->setRotation(q);
-	}
-
-	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::piOver2));
-	// Forward/back walls
-	for (int i = 0; i < 10; i++)
-	{
-		PlaneActor* p = new PlaneActor();
-		p->setPosition(Vector3(start - size, start + i * size, 0.0f));
-		p->setRotation(q);
-
-		p = new PlaneActor();
-		p->setPosition(Vector3(-start + size, start + i * size, 0.0f));
-		p->setRotation(q);
-	}*/
+	ea = new EnemyActor();
+	ea->setPosition(Vector3(0, -1100, 0));
 
 	// Setup lights
 	renderer.setAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -221,21 +91,7 @@ void Game::load()
 
 	// HUD
 	hud = new HUD();
-	/*
-	Actor* crosshairActor = new Actor();
-	crosshairActor->setScale(2.0f);
-	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
-	*/
-
-	/*
-	TargetActor* t = new TargetActor();
-	t->setPosition(Vector3(1450.0f, 0.0f, 100.0f));
-	t = new TargetActor();
-	t->setPosition(Vector3(1450.0f, 0.0f, 400.0f));
-	t = new TargetActor();
-	t->setPosition(Vector3(1450.0f, -500.0f, 200.0f));
-	t = new TargetActor();
-	t->setPosition(Vector3(1450.0f, 500.0f, 200.0f));*/
+	
 }
 
 void Game::processInput()
@@ -362,98 +218,8 @@ void Game::loop()
 
 void Game::reload()
 {
-	for (int i = 0; i < actors.size(); i++) {
-		actors[i]->setState(Actor::ActorState::Dead);
-	}
-	actors.clear();
-	Vector3 StartPos = Vector3(-500.f, -500.f, 0.f);
-	Vector3 EndPos = Vector3(-500.f, -500.f, 0.f);
-	Level& l1 = Assets::getLevel("Level1");
-	float size = 200.0f;
-	int mapSize = l1.getMaxSize();
-	//Load Tiles
-	for (int x = 0; x < mapSize; x++) {
-		for (int y = 0; y < mapSize; y++) {
-			PlaneActor* pw;
-			Quaternion q;
-			DoorActor* da;
-			switch (l1.getTileAt(x, y)) {
-			case 1:
-				q = Quaternion(Vector3::unitX, Maths::piOver2);
-				pw = new PlaneActor();
-				pw->setPosition(Vector3(x * size, (y - 0.5) * size, 0));
-				pw->setScale(2);
-				pw->setRotation(q);
-				pw->getMesh()->setTextureIndex(2);
-				pw = new PlaneActor();
-				pw->setPosition(Vector3(x * size, (y + 0.5) * size, 0));
-				pw->setScale(2);
-				pw->setRotation(q);
-				pw->getMesh()->setTextureIndex(2);
-				q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::piOver2));
-				pw = new PlaneActor();
-				pw->setPosition(Vector3((x - 0.5) * size, (y)*size, 0));
-				pw->setScale(2);
-				pw->setRotation(q);
-				pw->getMesh()->setTextureIndex(2);
-				pw = new PlaneActor();
-				pw->setPosition(Vector3((x + 0.5) * size, (y)*size, 0));
-				pw->setScale(2);
-				pw->setRotation(q);
-				pw->getMesh()->setTextureIndex(2);
-				break;
-			case 2:
-				StartPos = Vector3(x * size, y * size, 0);
-				break;
-			case 3:
-				EndPos = Vector3(x * size, y * size, 0);
-				break;
-
-			case 4:
-				da = new DoorActor();
-				da->setPosition(Vector3(x * size, y * size, 0));
-				da->setSize(size);
-				da->createDoors();
-				break;
-			default:
-				break;
-			}
-
-			PlaneActor* p = new PlaneActor();
-			p->setPosition(Vector3(x * size, y * size, -size / 2));
-			p->setScale(2);
-
-			p = new PlaneActor();
-			p->setPosition(Vector3(x * size, y * size, size / 2));
-			p->setScale(2);
-			//Quaternion q(Vector3::unitY, -Maths::piOver2);
-			//q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
-			//ca->setRotation(q);
-		}
-	}
-	//Load keys
-	for (int i = 0; i < l1.getKeyList().size(); i++) {
-		KeyData kd = l1.getKeyList()[i];
-		PickableKeyActor* pka = new PickableKeyActor();
-		pka->setKeyID(kd.keyID);
-		pka->setPosition(Vector3(kd.pos.y * size, kd.pos.x * size, 0));
-		addKey(pka);
-	}
-	//Load doors
-	for (int i = 0; i < l1.getDoors().size(); i++) {
-		DoorData kd = l1.getDoors()[i];
-		DoorActor* dka = new DoorActor();
-
-		dka->setPosition(Vector3(kd.pos.y * size, kd.pos.x * size, 0));
-		dka->setSize(size);
-		dka->createDoors();
-		dka->LockedKey(kd.keyID);
-		addDoors(dka);
-	}
-
-	player = new ShipActor();
-	player->setPosition(StartPos);
-
+	
+	
 }
 
 void Game::unload()
@@ -527,26 +293,4 @@ void Game::removePlane(PlaneActor* plane)
 {
 	auto iter = std::find(begin(planes), end(planes), plane);
 	planes.erase(iter);
-}
-
-void Game::removeKey(PickableKeyActor* k)
-{
-	auto iter = std::find(begin(keys), end(keys), k);
-	keys.erase(iter);
-}
-
-void Game::addDoors(DoorActor* k)
-{
-	doors.emplace_back(k);
-}
-
-void Game::removeDoors(DoorActor* k)
-{
-	auto iter = std::find(begin(doors), end(doors), k);
-	doors.erase(iter);
-}
-
-void Game::addKey(PickableKeyActor* k)
-{
-	keys.emplace_back(k);
 }

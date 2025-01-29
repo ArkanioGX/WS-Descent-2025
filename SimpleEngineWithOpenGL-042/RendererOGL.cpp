@@ -122,11 +122,22 @@ void RendererOGL::getScreenDirection(Vector3& outStart, Vector3& outDir) const
 	outDir.normalize();
 }
 
+Vector3 RendererOGL::getCameraPosition() const
+{
+	return view.getTranslation();
+}
+
+
 void RendererOGL::drawMeshes()
 {
 	// Enable depth buffering/disable alpha blend
 	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	//glDisable(GL_BLEND);
+
+
+
 	Shader& shader = Assets::getShader("Phong");
 	shader.use();
 	// Update view-projection matrix

@@ -65,8 +65,8 @@ void FPSActor::updateActor(float dt)
 	FPSModel->setRotation(q);
 
 	fixCollisions();
-
-	auto& keys = getGame().getKeys();
+/*
+	//auto& keys = getGame().getKeys();
 	for (auto k : keys)
 	{
 		// Do we collide with this PlaneActor?
@@ -75,7 +75,7 @@ void FPSActor::updateActor(float dt)
 		{
 			k->Pick();
 		}
-	}
+	}*/
 
 	Log::info(std::to_string((Game::instance().endPos - getPosition()).length()));
 	if ((Game::instance().endPos- getPosition() ).length() < 200) {

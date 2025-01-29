@@ -11,6 +11,9 @@ CollisionComponent(nullptr)
 	CollisionComponent = new SphereComponent(this);
 	MoveComponent = new ShipMoveComponent(this);
 	CameraComponent = new ShipCameraComponent(this);
+
+	Sphere sphereColl = Sphere(Vector3::zero, 60);
+	CollisionComponent->setObjectSphere(sphereColl);
 	
 
 }

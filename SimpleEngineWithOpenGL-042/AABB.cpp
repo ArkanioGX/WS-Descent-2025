@@ -67,7 +67,7 @@ float AABB::minDistSq(const Vector3& point) const
 	float dy = Maths::max(min.y - point.y, 0.0f);
 	dy = Maths::max(dy, point.y - max.y);
 	float dz = Maths::max(min.z - point.z, 0.0f);
-	dz = Maths::max(dy, point.z - max.z);
+	dz = Maths::max(dz, point.z - max.z);
 
 	return dx * dx + dy * dy + dz * dz;
 }

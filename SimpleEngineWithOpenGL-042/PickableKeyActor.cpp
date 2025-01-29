@@ -35,7 +35,6 @@ PickableKeyActor::PickableKeyActor():
 	box->setObjectBox(mesh->getBox());
 	box->setCanPassThrough(false);
 
-	getGame().addKey(this);
 }
 
 PickableKeyActor::~PickableKeyActor()

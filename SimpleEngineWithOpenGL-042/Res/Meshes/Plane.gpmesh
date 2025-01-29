@@ -4,15 +4,7 @@
 	"shader":"Phong",
 	"textures": [
 		"Plane",
-		"Ground",
-		"Wall",
-		"Door",
-		"DoorR",
-		"DoorB",
-		"KeyR",
-		"KeyB",
-		"BImpact",
-		"Exit"
+		"Enemy"
 	],
 	"specularPower":100.0,
 	"vertices":[

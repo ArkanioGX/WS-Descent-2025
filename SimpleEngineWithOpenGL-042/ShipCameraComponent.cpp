@@ -58,7 +58,6 @@ void ShipCameraComponent::update(float dt)
 
 	//Additive Roll
 
-	std::cout << additiveRoll << std::endl;
 	eulerAngle.x += additiveRoll;
 
 	Quaternion newRot = Quaternion::FromEuler(eulerAngle);
