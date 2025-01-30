@@ -15,3 +15,8 @@ EnemyActor::EnemyActor()
 EnemyActor::~EnemyActor()
 {
 }
+
+void EnemyActor::updateActor(float dt)
+{
+	count += dt;
+}

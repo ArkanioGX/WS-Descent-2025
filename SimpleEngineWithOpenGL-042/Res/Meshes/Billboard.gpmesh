@@ -4,7 +4,8 @@
 	"shader":"Sprite",
 	"textures": [
 		"Plane",
-		"Enemy"
+		"Enemy",
+		"EnemyBullet"
 	],
 	"specularPower":100.0,
 	"vertices":[

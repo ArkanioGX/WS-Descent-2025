@@ -73,7 +73,7 @@ bool RendererOGL::initialize(Window& windowP)
 
 void RendererOGL::beginDraw()
 {
-	glClearColor(0.45f, 0.45f, 1.0f, 1.0f);
+	glClearColor(0.0745f, 0.007f, 0.031f, 1.0f);
 	// Clear the color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

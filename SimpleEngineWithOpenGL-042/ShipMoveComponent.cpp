@@ -10,7 +10,7 @@
 ShipMoveComponent::ShipMoveComponent(Actor* ownerP):
 	Component(ownerP)
 {
-	sphereColl = owner.getComponent<SphereComponent*>();
+	sphereColl = owner.getComponent<SphereComponent>();
 }
 
 void ShipMoveComponent::update(float dt)

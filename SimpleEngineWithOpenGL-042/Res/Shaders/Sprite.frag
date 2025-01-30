@@ -14,7 +14,5 @@ void main()
 {
 	// Sample color from texture
     outColor = texture(uTexture, fragTexCoord);
-	if (outColor.a < 0.5f){
-		discard;
-	}
+	
 }

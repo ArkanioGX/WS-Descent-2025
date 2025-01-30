@@ -60,4 +60,7 @@ void main()
 
 	// Final color is texture color times phong light (alpha = 1)
     outColor = texture(uTexture, fragTexCoord) * vec4(Phong, 1.0f);
+	if (outColor.a < 0.5f){
+		discard;
+	}
 }

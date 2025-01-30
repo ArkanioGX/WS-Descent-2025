@@ -17,6 +17,7 @@
 #include "PickableKeyActor.h"
 #include "ShipActor.h"
 #include "EnemyActor.h"
+#include "EnemyBulletActor.h"
 
 bool Game::initialize()
 {
@@ -59,6 +60,7 @@ void Game::load()
 	Assets::loadTexture(renderer, "Res\\Textures\\BallImpact.png", "BImpact");
 	Assets::loadTexture(renderer, "Res\\Textures\\ExitPlatform.png", "Exit");
 	Assets::loadTexture(renderer, "Res\\Textures\\Enemy.png", "Enemy");
+	Assets::loadTexture(renderer, "Res\\Textures\\EnemyBullet.png", "EnemyBullet");
 
 	Assets::loadMesh("Res\\Meshes\\Cube.gpmesh", "Mesh_Cube");
 	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
@@ -79,13 +81,16 @@ void Game::load()
 	EnemyActor* ea = new EnemyActor();
 	ea->setPosition(Vector3(0, -1000, 0));
 
+	EnemyBulletActor* eb = new EnemyBulletActor(ea);
+	eb->setPosition(Vector3(-1000, 0, 0));
+
 	ea = new EnemyActor();
 	ea->setPosition(Vector3(0, -1100, 0));
 
 	// Setup lights
-	renderer.setAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
+	renderer.setAmbientLight(Vector3(.7f, .7f, .7f));
 	DirectionalLight& dir = renderer.getDirectionalLight();
-	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
+	dir.direction = Vector3(0.0f, -Maths::piOver2, -Maths::piOver2);
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 

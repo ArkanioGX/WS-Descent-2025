@@ -22,10 +22,6 @@ void MeshComponent::draw(Shader& shader)
 {
 	if (mesh)
 	{
-		string sname = mesh->getShaderName();
-		if (sname.size() > 0){
-			shader = Assets::getShader(sname);
-		}
 		Matrix4 wt = owner.getWorldTransform();
 		shader.setMatrix4("uWorldTransform", wt);
 		shader.setFloat("uSpecPower", mesh->getSpecularPower());

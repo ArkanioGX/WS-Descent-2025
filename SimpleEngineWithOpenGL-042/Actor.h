@@ -51,11 +51,11 @@ public:
 	void removeComponent(Component* component);
 
 	template <typename CompType>
-	inline CompType getComponent()
+	inline CompType* getComponent()
 	{
 		for (Component* currComp : components)
 		{
-			CompType currentEntry = dynamic_cast<CompType>(currComp);
+			CompType* currentEntry = dynamic_cast<CompType*>(currComp);
 			if (currentEntry != nullptr)
 			{
 				return currentEntry;

@@ -161,6 +161,7 @@
     <ClCompile Include="DoorActor.cpp" />
     <ClCompile Include="DoorPlaneActor.cpp" />
     <ClCompile Include="EnemyActor.cpp" />
+    <ClCompile Include="EnemyBulletActor.cpp" />
     <ClCompile Include="FollowActor.cpp" />
     <ClCompile Include="FollowCameraComponent.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PlaneActor.cpp" />
+    <ClCompile Include="ProjectileComponent.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Rectangle.cpp" />
@@ -237,6 +239,7 @@
     <ClInclude Include="DoorActor.h" />
     <ClInclude Include="DoorPlaneActor.h" />
     <ClInclude Include="EnemyActor.h" />
+    <ClInclude Include="EnemyBulletActor.h" />
     <ClInclude Include="FollowActor.h" />
     <ClInclude Include="FollowCameraComponent.h" />
     <ClInclude Include="Font.h" />
@@ -269,6 +272,7 @@
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneActor.h" />
+    <ClInclude Include="ProjectileComponent.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Rectangle.h" />

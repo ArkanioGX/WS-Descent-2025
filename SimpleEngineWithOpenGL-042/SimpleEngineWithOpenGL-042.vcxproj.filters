@@ -182,6 +182,8 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="BillboardComponent.cpp" />
     <ClCompile Include="EnemyActor.cpp" />
+    <ClCompile Include="ProjectileComponent.cpp" />
+    <ClCompile Include="EnemyBulletActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -376,6 +378,8 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="BillboardComponent.h" />
     <ClInclude Include="EnemyActor.h" />
+    <ClInclude Include="ProjectileComponent.h" />
+    <ClInclude Include="EnemyBulletActor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
