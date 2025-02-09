@@ -27,13 +27,5 @@ void ProjectileComponent::fixCollisions(float dt)
 	// Need to recompute world transform to update world box
 	owner.computeWorldTransform();
 
-	const Sphere& bulletSphere = sphereColl->getWorldSphere();
-	Vector3 pos = owner.getPosition();
 
-	CInfo collInfo;
-	std::vector<Actor*> actorToIgnore = {bulletOwner};
-	if (Game::instance().getPhysicsSystem().SphereCast(bulletSphere, collInfo, actorToIgnore)) {
-		//Collision Interactions
-		owner.setState(Actor::ActorState::Dead);
-	}
 }

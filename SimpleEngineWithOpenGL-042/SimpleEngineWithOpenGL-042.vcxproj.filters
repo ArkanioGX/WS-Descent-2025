@@ -184,6 +184,9 @@
     <ClCompile Include="EnemyActor.cpp" />
     <ClCompile Include="ProjectileComponent.cpp" />
     <ClCompile Include="EnemyBulletActor.cpp" />
+    <ClCompile Include="BulletFlashActor.cpp" />
+    <ClCompile Include="ShipShootComponent.cpp" />
+    <ClCompile Include="ShipBulletActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -380,6 +383,9 @@
     <ClInclude Include="EnemyActor.h" />
     <ClInclude Include="ProjectileComponent.h" />
     <ClInclude Include="EnemyBulletActor.h" />
+    <ClInclude Include="BulletFlashActor.h" />
+    <ClInclude Include="ShipShootComponent.h" />
+    <ClInclude Include="ShipBulletActor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

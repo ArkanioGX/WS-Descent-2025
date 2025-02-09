@@ -153,6 +153,7 @@
     <ClCompile Include="BallMoveComponent.cpp" />
     <ClCompile Include="BillboardComponent.cpp" />
     <ClCompile Include="BoxComponent.cpp" />
+    <ClCompile Include="BulletFlashActor.cpp" />
     <ClCompile Include="BulletImpactActor.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
@@ -201,8 +202,10 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShipActor.cpp" />
+    <ClCompile Include="ShipBulletActor.cpp" />
     <ClCompile Include="ShipCameraComponent.cpp" />
     <ClCompile Include="ShipMoveComponent.cpp" />
+    <ClCompile Include="ShipShootComponent.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereActor.cpp" />
     <ClCompile Include="SphereComponent.cpp" />
@@ -230,6 +233,7 @@
     <ClInclude Include="BallMoveComponent.h" />
     <ClInclude Include="BillboardComponent.h" />
     <ClInclude Include="BoxComponent.h" />
+    <ClInclude Include="BulletFlashActor.h" />
     <ClInclude Include="BulletImpactActor.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CameraComponent.h" />
@@ -281,8 +285,10 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShipActor.h" />
+    <ClInclude Include="ShipBulletActor.h" />
     <ClInclude Include="ShipCameraComponent.h" />
     <ClInclude Include="ShipMoveComponent.h" />
+    <ClInclude Include="ShipShootComponent.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereActor.h" />
     <ClInclude Include="SphereComponent.h" />

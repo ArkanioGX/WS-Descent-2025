@@ -109,7 +109,6 @@ bool PhysicsSystem::SphereCast(const Sphere& l, CInfo& outColl, std::vector<Acto
 		}
 	}
 	return collided;
-	return false;
 }
 
 void PhysicsSystem::testPairwise(std::function<void(Actor*, Actor*)> f)

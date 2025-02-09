@@ -10,7 +10,7 @@ private:
 	class BillboardComponent* BBComponent;
 	class SphereComponent* CollisionComponent;
 
-	int count = 0;
+	float count = 0;
 
 public:
 	void updateActor(float dt) override;

@@ -138,18 +138,19 @@ void RendererOGL::drawMeshes()
 
 
 
-	Shader& shader = Assets::getShader("Phong");
-	shader.use();
-	// Update view-projection matrix
-	shader.setMatrix4("uViewProj", view * projection);
-	// Lights
-	setLightUniforms(shader);
+	
 	// Draw
 	for (auto mc : meshes)
 	{
+		Shader& shader = Assets::getShader(mc->getShaderName());
+		shader.use();
+		// Update view-projection matrix
+		shader.setMatrix4("uViewProj", view * projection);
+		// Lights
+		setLightUniforms(shader);
 		if (mc->getVisible())
 		{
-			mc->draw(Assets::getShader("Phong"));
+			mc->draw(shader);
 		}
 	}
 }

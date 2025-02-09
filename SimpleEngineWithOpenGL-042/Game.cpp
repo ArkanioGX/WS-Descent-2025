@@ -61,13 +61,13 @@ void Game::load()
 	Assets::loadTexture(renderer, "Res\\Textures\\ExitPlatform.png", "Exit");
 	Assets::loadTexture(renderer, "Res\\Textures\\Enemy.png", "Enemy");
 	Assets::loadTexture(renderer, "Res\\Textures\\EnemyBullet.png", "EnemyBullet");
+	Assets::loadTexture(renderer, "Res\\Textures\\EnemyBulletFlash.png", "EnemyBulletFlash");
+	Assets::loadTexture(renderer, "Res\\Textures\\PlayerBullet.png", "ShipBullet");
+	Assets::loadTexture(renderer, "Res\\Textures\\PlayerBulletFlash.png", "ShipBulletFlash");
 
 	Assets::loadMesh("Res\\Meshes\\Cube.gpmesh", "Mesh_Cube");
 	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
 	Assets::loadMesh("Res\\Meshes\\Sphere.gpmesh", "Mesh_Sphere");
-	Assets::loadMesh("Res\\Meshes\\Rifle.gpmesh", "Mesh_Rifle");
-	Assets::loadMesh("Res\\Meshes\\RacingCar.gpmesh", "Mesh_RacingCar");
-	Assets::loadMesh("Res\\Meshes\\Target.gpmesh", "Mesh_Target");
 	Assets::loadMesh("Res\\Meshes\\BulletImpact.gpmesh", "Mesh_BImpact");
 	Assets::loadMesh("Res\\Meshes\\Billboard.gpmesh", "Mesh_Billboard");
 
@@ -80,9 +80,6 @@ void Game::load()
 
 	EnemyActor* ea = new EnemyActor();
 	ea->setPosition(Vector3(0, -1000, 0));
-
-	EnemyBulletActor* eb = new EnemyBulletActor(ea);
-	eb->setPosition(Vector3(-1000, 0, 0));
 
 	ea = new EnemyActor();
 	ea->setPosition(Vector3(0, -1100, 0));

@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Mesh.h"
 
+
 MeshComponent::MeshComponent(Actor* owner) : Component(owner), mesh(nullptr), textureIndex(0), isVisible(true)
 {
 	owner->getGame().getRenderer().addMesh(this);
@@ -45,3 +46,9 @@ void MeshComponent::setTextureIndex(size_t textureIndexP)
 {
 	textureIndex = textureIndexP;
 }
+
+std::string MeshComponent::getShaderName()
+{
+	return mesh->getShaderName();
+}
+

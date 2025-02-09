@@ -1,16 +1,19 @@
 #pragma once
 #include "Actor.h"
-class EnemyBulletActor : public Actor
+class ShipBulletActor : public Actor
 {
 public:
-	EnemyBulletActor(Actor* owner);
-	~EnemyBulletActor();
+	ShipBulletActor(Actor* owner);
+	~ShipBulletActor();
 
 	void updateActor(float dt) override;
+	void fixCollisions();
 
 private:
 	class BillboardComponent* BBComponent;
 	class SphereComponent* CollisionComponent;
 	class ProjectileComponent* projComponent;
+
+	Actor* bulletOwner;
 };
 

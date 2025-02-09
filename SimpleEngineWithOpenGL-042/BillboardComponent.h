@@ -8,7 +8,11 @@ public:
 
 	void update(float dt) override;
 
+	void setAngle(float inAngle);
+	float getAngle() const { return angle; }
+
 private:
-	//Actor* player;
+
+	float angle = 0.f;
 };
 

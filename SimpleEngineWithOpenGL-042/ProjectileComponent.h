@@ -22,7 +22,7 @@ private:
 	class SphereComponent* sphereColl;
 
 	Vector3 fwd = Vector3::unitX;
-	float spd = 100;
+	float spd = 500;
 	float dmg = 1;
 	float maxLifetime = 10;
 	

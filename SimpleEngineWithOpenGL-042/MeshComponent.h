@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include <string>
 class MeshComponent : public Component
 {
 public:
@@ -12,6 +13,8 @@ public:
 	virtual void draw(class Shader& shader);
 	virtual void setMesh(class Mesh& meshP);
 	void setTextureIndex(size_t textureIndexP);
+
+	std::string getShaderName();
 
 
 protected:

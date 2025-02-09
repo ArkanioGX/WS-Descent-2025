@@ -5,7 +5,10 @@
 	"textures": [
 		"Plane",
 		"Enemy",
-		"EnemyBullet"
+		"EnemyBullet",
+		"EnemyBulletFlash",
+		"ShipBullet",
+		"ShipBulletFlash"
 	],
 	"specularPower":100.0,
 	"vertices":[
