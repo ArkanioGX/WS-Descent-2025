@@ -187,6 +187,7 @@
     <ClCompile Include="BulletFlashActor.cpp" />
     <ClCompile Include="ShipShootComponent.cpp" />
     <ClCompile Include="ShipBulletActor.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -386,6 +387,7 @@
     <ClInclude Include="BulletFlashActor.h" />
     <ClInclude Include="ShipShootComponent.h" />
     <ClInclude Include="ShipBulletActor.h" />
+    <ClInclude Include="HealthComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

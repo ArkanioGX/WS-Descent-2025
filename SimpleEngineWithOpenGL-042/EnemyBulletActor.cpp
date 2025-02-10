@@ -26,18 +26,5 @@ EnemyBulletActor::~EnemyBulletActor()
 
 void EnemyBulletActor::updateActor(float dt)
 {
-	const Sphere& bulletSphere = CollisionComponent->getWorldSphere();
-
-	CInfo collInfo;
-	std::vector<Actor*> actorToIgnore = { this };
-	if (Game::instance().getPhysicsSystem().SphereCast(bulletSphere, collInfo, actorToIgnore)) {
-		//Collision Interactions
-		if (static_cast<WallActor*>(collInfo.actor)) {
-			BulletFlashActor* bfa = new BulletFlashActor();
-			Vector3 preciseImpact = collInfo.point;
-			bfa->setPosition(preciseImpact - (projComponent->getForward() * 10));
-			bfa->setAngle(Random::getFloatRange(0, Maths::twoPi));
-			setState(ActorState::Dead);
-		}
-	}
+	
 }

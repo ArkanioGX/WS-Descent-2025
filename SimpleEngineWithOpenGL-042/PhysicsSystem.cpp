@@ -108,6 +108,30 @@ bool PhysicsSystem::SphereCast(const Sphere& l, CInfo& outColl, std::vector<Acto
 			}
 		}
 	}
+	for (auto sphere : spheres)
+	{
+		float t;
+		// Does the segment intersect with the box?
+		if (Collisions::intersect(l, sphere->getWorldSphere()))
+		{
+			t = Maths::abs((l.center - sphere->getOwner().getPosition()).length());
+			// Is this closer than previous intersection?
+			if (t < closestT && std::find(ActorsToIgnore.begin(), ActorsToIgnore.end(), &sphere->getOwner()) == ActorsToIgnore.end())
+			{
+				closestT = t;
+				Vector3 contactPoint = Vector3::clamp(
+					sphere->getWorldSphere().center - l.center,
+					l.radius
+				);
+				outColl.point = l.center + contactPoint;
+				outColl.normal = (l.center - contactPoint);
+				outColl.normal.normalize();
+				outColl.comp = sphere;
+				outColl.actor = &sphere->getOwner();
+				collided = true;
+			}
+		}
+	}
 	return collided;
 }
 

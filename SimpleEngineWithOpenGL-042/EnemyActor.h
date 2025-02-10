@@ -9,6 +9,7 @@ public:
 private:
 	class BillboardComponent* BBComponent;
 	class SphereComponent* CollisionComponent;
+	class HealthComponent* HPComponent;
 
 	float count = 0;
 

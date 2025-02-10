@@ -4,15 +4,22 @@
 #include "EnemyBulletActor.h"
 #include "ProjectileComponent.h"
 #include "BulletFlashActor.h"
+#include "HealthComponent.h"
 #include "Game.h"
 #include "Random.h"
 
 EnemyActor::EnemyActor()
 {
 	CollisionComponent = new SphereComponent(this);
+	Sphere sphereColl = Sphere(Vector3::zero, 1);
+	CollisionComponent->setObjectSphere(sphereColl);
 
 	BBComponent = new BillboardComponent(this);
 	BBComponent->setTextureIndex(1);
+
+	HPComponent = new HealthComponent(this);
+	HPComponent->setMaxHP(40);
+	HPComponent->setTeam(Team::Enemy);
 
 	setScale(150);
 }

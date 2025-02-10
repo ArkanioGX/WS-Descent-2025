@@ -21,9 +21,10 @@ private:
 
 	class SphereComponent* sphereColl;
 
+
 	Vector3 fwd = Vector3::unitX;
 	float spd = 500;
-	float dmg = 1;
+	float dmg = 10;
 	float maxLifetime = 10;
 	
 	float currentLifetime = 0;

@@ -72,8 +72,11 @@ void ShipMoveComponent::fixCollisions(float dt)
 
 	//TODO : DO COLLISIONS HERE
 	CInfo collInfo;
-	std::vector<Actor*> actorToIgnore = {};
+	std::vector<Actor*> actorToIgnore = {&getOwner()};
 	if (Game::instance().getPhysicsSystem().SphereCast(playerSphere, collInfo, actorToIgnore)) {
+		if (SphereComponent* sc = dynamic_cast<SphereComponent*>(collInfo.comp)) {
+			if (sc->getCanPassThrough()) { return; }
+		}
 		std::cout << " x : " << collInfo.point.x << " y : " << collInfo.point.y << " z : " << collInfo.point.z << std::endl;
 		velocity = Vector3::reflect(velocity,collInfo.normal);
 		owner.setPosition(owner.getPosition() + velocity * dt);

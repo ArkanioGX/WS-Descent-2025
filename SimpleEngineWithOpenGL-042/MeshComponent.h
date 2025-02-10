@@ -13,6 +13,7 @@ public:
 	virtual void draw(class Shader& shader);
 	virtual void setMesh(class Mesh& meshP);
 	void setTextureIndex(size_t textureIndexP);
+	size_t getTextureIndex() { return textureIndex; }
 
 	std::string getShaderName();
 
