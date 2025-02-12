@@ -18,7 +18,7 @@ EnemyActor::EnemyActor()
 	BBComponent->setTextureIndex(1);
 
 	HPComponent = new HealthComponent(this);
-	HPComponent->setMaxHP(40);
+	HPComponent->setMaxHP(80);
 	HPComponent->setTeam(Team::Enemy);
 
 	setScale(150);

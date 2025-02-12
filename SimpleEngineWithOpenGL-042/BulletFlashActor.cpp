@@ -7,6 +7,7 @@ BulletFlashActor::BulletFlashActor():
 {
 	bbComponent = new BillboardComponent(this);
 	bbComponent->setTextureIndex(3);
+	bbComponent->setAngle(0);
 }
 
 void BulletFlashActor::updateActor(float dt)

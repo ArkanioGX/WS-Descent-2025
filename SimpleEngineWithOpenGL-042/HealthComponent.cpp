@@ -1,11 +1,19 @@
 #include "HealthComponent.h"
+#include "BulletFlashActor.h"
 #include "Actor.h"
 #include "Game.h"
+#include "Random.h"
+#include "GameOverScreen.h"
 
 HealthComponent::HealthComponent(Actor* ownerP):
 Component(ownerP)
 {
 
+}
+
+void HealthComponent::update(float dt)
+{
+	
 }
 
 void HealthComponent::heal()
@@ -25,8 +33,9 @@ bool HealthComponent::dealDamage(int dmg, Team emmiterTeam)
 		currentHP = Maths::clamp(currentHP - dmg, 0, maxHP);
 		if (&owner == Game::instance().getPlayer()) {
 			Game::instance().getHUD()->updateHP(currentHP);
-			if (currentHP == 0) {
-				
+			if (currentHP == 0 && !isPlayerDead) {
+				isPlayerDead = true;
+				new GameOverScreen();
 			}
 		}
 		else {
