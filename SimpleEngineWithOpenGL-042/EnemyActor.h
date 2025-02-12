@@ -12,6 +12,8 @@ private:
 	class HealthComponent* HPComponent;
 
 	float count = 0;
+	bool isActive = false;
+	float maxDist = 1000;
 
 public:
 	void updateActor(float dt) override;

@@ -3,7 +3,6 @@
 #include "BoxComponent.h"
 #include "Mesh.h"
 #include "Assets.h"
-#include "TargetComponent.h"
 
 TargetActor::TargetActor()
 {
@@ -13,5 +12,4 @@ TargetActor::TargetActor()
 	// Add collision box
 	BoxComponent* bc = new BoxComponent(this);
 	bc->setObjectBox(Assets::getMesh("Mesh_Target").getBox());
-	new TargetComponent(this);
 }

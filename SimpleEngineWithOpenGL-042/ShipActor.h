@@ -11,5 +11,6 @@ private:
 	class ShipMoveComponent* MoveComponent;
 	class ShipShootComponent* ShootComponent;
 	class SphereComponent* CollisionComponent;
+	class HealthComponent* HPComponent;
 };
 

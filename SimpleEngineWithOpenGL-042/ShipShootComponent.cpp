@@ -23,6 +23,7 @@ void ShipShootComponent::update(float dt)
 		ProjectileComponent* pc = bullet->getComponent<ProjectileComponent>();
 		Vector3 newFwd = Vector3::transform(Vector3::unitX, owner.getRotation());
 		pc->setFwd(newFwd);
+		pc->setSpeed(1200);
 
 		bullet = new ShipBulletActor(&getOwner());
 
@@ -30,6 +31,7 @@ void ShipShootComponent::update(float dt)
 		pc = bullet->getComponent<ProjectileComponent>();
 		newFwd = Vector3::transform(Vector3::unitX, owner.getRotation());
 		pc->setFwd(newFwd);
+		pc->setSpeed(1200);
 
 		currentDelay = delayBetweenShots;
 

@@ -3,6 +3,7 @@
 #include "ShipMoveComponent.h"
 #include "SphereComponent.h"
 #include "ShipShootComponent.h"
+#include "HealthComponent.h"
 
 ShipActor::ShipActor() :Actor(),
 MoveComponent(nullptr),
@@ -17,7 +18,9 @@ CollisionComponent(nullptr)
 	Sphere sphereColl = Sphere(Vector3::zero, 60);
 	CollisionComponent->setObjectSphere(sphereColl);
 
-
+	HPComponent = new HealthComponent(this);
+	HPComponent->setMaxHP(100);
+	HPComponent->setTeam(Team::Player);
 	
 
 }

@@ -13,6 +13,7 @@ public:
 
 	void setDamage(float inDmg) { dmg = inDmg; }
 	void setFwd(Vector3 inFwd) { fwd = inFwd; }
+	void setSpeed(float inSpd) { spd = inSpd; }
 
 	Vector3 getForward() { return fwd; }
 
